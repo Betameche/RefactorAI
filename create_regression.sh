@@ -10,7 +10,7 @@ OUTPUT_FILE="${INPUT_FILE%.cpp}_regress.cpp"
 AI_DATA_FILE="${INPUT_FILE%.cpp}_regress.txt"
 TIME_LOG_FILE="time.csv"
 
-RESUME_PROMPT="Please generate regression tests for the following code. Ensure that the tests are comprehensive and cover all functionalities. The entire code should be in one file. Output only the code in a single C block, with one function per test. here is the code:"
+RESUME_PROMPT="Please generate regression tests for the following code. Ensure that the tests are comprehensive and cover all functionalities. The entire code should be in one file. Output only the code in a single C block, with one function per test. use gtest. here is the code:"
 
 START_TIME=$(date +%s)
 

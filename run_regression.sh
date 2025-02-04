@@ -1,7 +1,7 @@
-#!/bin/bash
+#!/bin/sh
 
 # func to check if regression passed
-function check_regression {
+check_regression() {
     if [ "$1" -eq 0 ]; then
         echo "Regression passed"
     else
@@ -18,11 +18,12 @@ fi
 
 # create regression tests if they don't exist in src folder
 for file in src/*.cpp; do
-    if [[ "$file" != *_regress.cpp ]]; then
-        regress_file="src/$(basename "$file" .cpp)_regress.cpp"
-        if [ ! -f "$regress_file" ]; then
-            ./create_regression.sh "$file"
-        fi
+    case "$file" in
+        *_regress.cpp) continue ;;
+    esac
+    regress_file="src/$(basename "$file" .cpp)_regress.cpp"
+    if [ ! -f "$regress_file" ]; then
+        "$(dirname "$0")/create_regression.sh" "$file"
     fi
 done
 
