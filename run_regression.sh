@@ -32,7 +32,19 @@ for file in src/*_regress.cpp; do
 done
 
 # run all regression tests
+passed=0
+failed=0
+
 for file in regression/*; do
     ./"$file"
-    check_regression $?
+    if [ $? -eq 0 ]; then
+        passed=$((passed + 1))
+    else
+        failed=$((failed + 1))
+    fi
 done
+
+total=$((passed + failed))
+echo "Passed: $passed"
+echo "Failed: $failed"
+echo "Total: $total"
