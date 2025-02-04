@@ -12,4 +12,7 @@ RESUME_PROMPT="extract from this code information that would be needed to refact
 
 AI_DATA=$( ( echo "$RESUME_PROMPT" ; cat "$INPUT_FILE" ) | ollama run deepseek-r1:14b )
 
+# Remove everything inside the <think> and </think> tags
+AI_DATA=$(echo "$AI_DATA" | sed 's/<think>.*<\/think>//g')
+
 echo "$AI_DATA" > "$OUTPUT_FILE"
